@@ -1,7 +1,7 @@
 import React from "react";
 
 export type SearchProps = {
-    handleSearch: ()=>void
+    handleSearch: (searchQuery: string)=>void
 };
 
 export type TabPros = {

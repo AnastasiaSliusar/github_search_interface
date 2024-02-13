@@ -1,8 +1,10 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { SearchProps } from "../utils/type";
+import lodash from "lodash";
+import { timeout } from "../utils/data";
 
 const SearchWrapper = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -44,6 +46,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Search = ({ handleSearch }: SearchProps) => {
+
+	const debouncedHandleSearch = useCallback(lodash.debounce(handleSearch, timeout), []);
+
+	let onChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+		debouncedHandleSearch(event.target.value);
+	}
+	
 	return (
 		<SearchWrapper>
 			<SearchIconWrapper>
@@ -52,7 +61,7 @@ const Search = ({ handleSearch }: SearchProps) => {
 			<StyledInputBase
 				placeholder="Search github repository"
 				inputProps={{ "aria-label": "search" }}
-				onChange={handleSearch}
+				onChange={onChange}
 			/>
 		</SearchWrapper>
 	);
