@@ -1,47 +1,77 @@
 import React, { useCallback, useState } from "react";
 import "./App.css";
-import Navigation from "./components/Navigation";
-import Welcome from "./components/Welcome";
-import TabContent from "./components/TabContent";
-import { useQuery } from "@apollo/client";
-import { SEARCH_REPOSITORIES } from "./utils/query";
-import useSearch from "./utils/useSearch";
+import Navigation from "./components/navigation/Navigation";
+import TabContent from "./components/navigation/TabContent";
+import { Box } from "@mui/material";
+import { FavoritesListProps, SearchResultProps } from "./utils/type";
+import Welcome from "./components/searchContent/Welcome";
+import SearchRepositories from "./components/searchContent/SearchRepositories";
+import Favorites from "./components/favorites/Favorites";
 
 function App() {
 	const [activeTab, setActiveTab] = useState(0);
-	const [isFavorite, setIsFavorite] = useState(false);
-	const [searchQuery, setSearchQuery] = useState('');
-	const [favoriteItem, setFavoriteItem] = useState([]);
-	const {searchResult, error, loading }= useSearch(searchQuery);
-	
+	const [searchQuery, setSearchQuery] = useState("");
+	const [favoriteRepos, setFavorites] = useState<FavoritesListProps>({});
+	const [searchResult, setSearchResult] = useState<SearchResultProps[]>([]);
 
-	function handleSearch(search: string) {
-		let query = `${search} in:name`;
+	const handleSearch = (search: string) => {
+		let query = "";
+		if (search) {
+			query = `${search} in:name`;
+		}
 		console.log(`query-->${query}`);
 		setSearchQuery(query);
-	}
+	};
 
-	function handleChangeTab(newActiveTab: number) {
+	const handleChangeTab = (newActiveTab: number) => {
 		setActiveTab(newActiveTab);
-	}
+	};
 
-	let content = !searchResult.length ? <Welcome /> : <></>;
+	const updateData = (repos: SearchResultProps[]) => {
+		console.log(`data-->${repos}`);
+		setSearchResult(repos);
+	};
+
+	const updateFavorites = (repo: SearchResultProps, isFavorite: boolean) => {
+		if (isFavorite) {
+			if (!favoriteRepos[repo.id]) {
+				favoriteRepos[repo.id] = { ...repo, isFavorite, reviewCount: 0 };
+				setFavorites(favoriteRepos);
+			}
+		} else {
+			if (favoriteRepos[repo.id]) {
+				let tmpFavorites = { ...favoriteRepos };
+				delete tmpFavorites[repo.id];
+				setFavorites(tmpFavorites);
+			}
+		}
+	};
+
+	console.log(`favoriteRepos-->${JSON.stringify(favoriteRepos)}`);
 	return (
-		<>
+		<Box>
 			<Navigation
 				handleSearch={handleSearch}
 				handleChangeTab={handleChangeTab}
 				activeTab={activeTab}
-				isFavorite={isFavorite}
 			/>
-
-			<TabContent activeTab={activeTab} contentId={0}>
-				{content}
-			</TabContent>
-			<TabContent activeTab={activeTab} contentId={1}>
-				<div></div>
-			</TabContent>
-		</>
+			<Box>
+				<TabContent activeTab={activeTab} contentId={0}>
+					{(!searchResult.length || !searchQuery) && <Welcome />}
+					{searchQuery && (
+						<SearchRepositories
+							searchQuery={searchQuery}
+							updateData={updateData}
+							updateFavorites={updateFavorites}
+							favoriteRepos={favoriteRepos}
+						/>
+					)}
+				</TabContent>
+				<TabContent activeTab={activeTab} contentId={1}>
+					<Favorites favorites={favoriteRepos} updateFavorites={updateFavorites}/>
+				</TabContent>
+			</Box>
+		</Box>
 	);
 }
 

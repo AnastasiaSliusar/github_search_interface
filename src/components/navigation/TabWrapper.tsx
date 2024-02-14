@@ -2,8 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPros } from "../utils/type";
-import { navigation } from "../utils/data";
+import { TabPros } from "../../utils/type";
+import { navigation } from "../../utils/data";
 import { styled, alpha } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
@@ -23,7 +23,7 @@ const TabsStyled = styled(Tabs)(({ theme }) => ({
 	},
 }));
 
-const TabWrapper = ({ handleChangeTab, activeTab, isFavorite }: TabPros) => {
+const TabWrapper = ({ handleChangeTab, activeTab }: TabPros) => {
 	function onChange(event: React.SyntheticEvent, newActiveTab: number){
 		handleChangeTab(newActiveTab);
 	}
@@ -35,10 +35,7 @@ const TabWrapper = ({ handleChangeTab, activeTab, isFavorite }: TabPros) => {
 				id={`tab-${index}`}
 				key={index}
 				aria-controls={`navItem-${item}`}
-				style={{
-					display: item === "Favorite" && !isFavorite ? "none" : "inherit",
-				}}
-				icon={item === "Favorite" && isFavorite ? <FavoriteIcon /> : undefined}
+				icon={item === "Favorite" ? <FavoriteIcon /> : undefined}
 				iconPosition="start"
 			/>
 		);

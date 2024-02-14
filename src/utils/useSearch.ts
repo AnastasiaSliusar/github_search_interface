@@ -3,44 +3,34 @@ import { SEARCH_REPOSITORIES } from "./query";
 import { useQuery } from "@apollo/client";
 
 function useSearch(searchQuery: string) {
+	
 	const [searchResult, setSearchResult] = useState([]);
-	const [error, setError] = useState(false);
-	const [loading, setLoading] = useState(false);
 
-    console.log('-----Beggining userSearch-----');
-    console.log(`searchQuery->${searchQuery}`);
-    console.log(`error->${error}`);
-    console.log(`error->${loading}`);
+	console.log("-----Beggining userSearch-----");
+	console.log(`searchQuery->${searchQuery}`);
 
-    console.log(`searchResult->${searchResult}`);
+	console.log(`searchResult->${searchResult}`);
 
-	useEffect(() => {
-		let searchResult = {};
-		if (searchQuery) {
-			const { loading, error, data } = useQuery(SEARCH_REPOSITORIES, {
-				variables: {
-					query: searchQuery,
-				},
-			});
+	const { loading, error, data } = useQuery(SEARCH_REPOSITORIES, {
+		variables: {
+			query: searchQuery,
+		},
+		skip: !searchQuery,
+	});
 
-			/*if (data.search.nodes.length) {
+	/*if (data.search.nodes.length) {
 			for (let index = 0; i < data.search.nodes.length; i++) {}
 		}*/
-			if (error) {
-				setError(true);
-			}
+	console.log(`data-->${data}`);
+	if (data.search.node.length) {
+		setSearchResult(data.search.node.length);
+	}
 
-			if (loading) {
-				setLoading(true);
-			}
+	
+	console.log(`error->${error}`);
+	console.log(`error->${loading}`);
 
-			if (data.search.node.length) {
-				setSearchResult(data.search.node.length);
-			}
-		}
-	}, [searchQuery]);
-
-    console.log('-----Ending userSearch-----');
+	console.log("-----Ending userSearch-----");
 
 	return {
 		searchResult,

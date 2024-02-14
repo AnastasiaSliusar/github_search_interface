@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { SearchProps } from "../utils/type";
+import { SearchProps } from "../../utils/type";
 import lodash from "lodash";
-import { timeout } from "../utils/data";
+import { timeout } from "../../utils/data";
 
 const SearchWrapper = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -45,7 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	},
 }));
 
-const Search = ({ handleSearch }: SearchProps) => {
+const SearchInput = ({ handleSearch }: SearchProps) => {
 
 	const debouncedHandleSearch = useCallback(lodash.debounce(handleSearch, timeout), []);
 
@@ -67,4 +67,4 @@ const Search = ({ handleSearch }: SearchProps) => {
 	);
 };
 
-export default Search;
+export default SearchInput;

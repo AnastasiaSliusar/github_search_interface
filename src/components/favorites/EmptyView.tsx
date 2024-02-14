@@ -1,9 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Icon, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
-const Welcome = () => {
+const EmptyView = () => {
+
 	return (
 		<Box>
 			<Box
@@ -17,13 +18,13 @@ const Welcome = () => {
 				/>
 			</Box>
 			<Typography variant="h3" align="center" gutterBottom>
-				Welcome to GitHub Search Interface
+				There is no any favorite repository
 			</Typography>
 			<Typography variant="h4" align="center" gutterBottom>
-				Please put GitHub repo name into Search field in order to find required repositories
+				Please add your favorite repository from search result
 			</Typography>
 		</Box>
 	);
 };
 
-export default Welcome;
+export default EmptyView;

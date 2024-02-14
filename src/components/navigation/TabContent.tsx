@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { TabContentProps } from "../utils/type";
+import { TabContentProps } from "../../utils/type";
 
 const TabContent = ({ activeTab, contentId, children }: TabContentProps) => {
 	return (
