@@ -1,27 +1,21 @@
 import React, { useState } from "react";
-import { FavoritesProps, SearchResultProps } from "../../utils/type";
+import { RepoItemProps, SearchResultProps } from "../../utils/type";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import {
-	Button,
 	Card as MuiCard,
-	CardActions,
 	CardContent,
-	CardHeader,
 	Typography,
 	IconButton,
 	Link,
 	Box,
 } from "@mui/material";
 
-type RepoItemProps = {
-	repo: SearchResultProps;
-	isFavorite: boolean;
-	updateFavorites: (repo: SearchResultProps, isFavorite: boolean) => void;
-};
 
-const RepoItem = ({ repo, isFavorite, updateFavorites }: RepoItemProps) => {
+const RepoItem = ({ repo, isFavorite, updateFavorites, children }: RepoItemProps) => {
+
+	console.log(`reviews-->${children}`);
 	const [isFav, setIsFav] = useState(isFavorite);
 	console.log(`repo-->${JSON.stringify(repo)}`);
 	console.log(`isFav--.${isFav}`);
@@ -68,6 +62,7 @@ const RepoItem = ({ repo, isFavorite, updateFavorites }: RepoItemProps) => {
 					</IconButton>
 				</Box>
 			</CardContent>
+			{children}
 		</MuiCard>
 	);
 };

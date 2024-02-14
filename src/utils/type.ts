@@ -42,12 +42,19 @@ export type SearchResultProps = {
 
 export type FavoritesProps = SearchResultProps & {
     isFavorite:boolean
-    reviewCount?: number
+    reviewCount: number
 }
 
 export type FavoritesListProps = {
     [key: string]:FavoritesProps
 }
+
+export type RepoItemProps = {
+	repo: SearchResultProps
+	isFavorite: boolean
+	updateFavorites: (repo: SearchResultProps, isFavorite: boolean) => void
+    children?: React.ReactNode
+};
 
 //
 export type SearchContentProps = {
@@ -71,6 +78,19 @@ export type SearchRepositoriesProps = {
 } 
 
 export type FavoritesPageProps = {
-    favorites: FavoritesListProps,
+    favorites: FavoritesListProps
     updateFavorites:(repo: SearchResultProps, isFavorite: boolean) => void
+    updateReviews: (repo: FavoritesProps, reviewCount: number) => void;
+}
+
+export type ReviewProps = {
+	repo: FavoritesProps
+	updateReviews: (repo: FavoritesProps, reviewCount: number) => void
+};
+
+export type ReviewStarProps = {
+    item: number
+    repo: FavoritesProps
+	updateReviews: (repo: FavoritesProps, reviewCount: number) => void
+    isSelected: boolean
 }

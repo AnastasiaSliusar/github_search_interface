@@ -3,7 +3,7 @@ import "./App.css";
 import Navigation from "./components/navigation/Navigation";
 import TabContent from "./components/navigation/TabContent";
 import { Box } from "@mui/material";
-import { FavoritesListProps, SearchResultProps } from "./utils/type";
+import { FavoritesListProps, FavoritesProps, SearchResultProps } from "./utils/type";
 import Welcome from "./components/searchContent/Welcome";
 import SearchRepositories from "./components/searchContent/SearchRepositories";
 import Favorites from "./components/favorites/Favorites";
@@ -47,6 +47,11 @@ function App() {
 		}
 	};
 
+	const updateReviews = (repo: FavoritesProps, reviewCount: number) => {
+		favoriteRepos[repo.id] = { ...repo, reviewCount };
+		setFavorites(favoriteRepos);
+	}
+
 	console.log(`favoriteRepos-->${JSON.stringify(favoriteRepos)}`);
 	return (
 		<Box>
@@ -68,7 +73,7 @@ function App() {
 					)}
 				</TabContent>
 				<TabContent activeTab={activeTab} contentId={1}>
-					<Favorites favorites={favoriteRepos} updateFavorites={updateFavorites}/>
+					<Favorites favorites={favoriteRepos} updateFavorites={updateFavorites} updateReviews={updateReviews}/>
 				</TabContent>
 			</Box>
 		</Box>
