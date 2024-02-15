@@ -93,4 +93,5 @@ export type ReviewStarProps = {
     repo: FavoritesProps
 	updateReviews: (repo: FavoritesProps, reviewCount: number) => void
     isSelected: boolean
+    selectedReview: number
 }

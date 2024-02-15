@@ -4,46 +4,40 @@ import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { IconButton } from "@mui/material";
 
-const ReviewStar = ({ item, repo, updateReviews, isSelected }: ReviewStarProps) => {
+const ReviewStar = ({ item, repo, updateReviews, isSelected, selectedReview }: ReviewStarProps) => {
+    const [isStarSelected, setSelectedStar] = useState(isSelected);
+    const updateReview = () => {
 
-    console.log(`item->${item}`);
-    console.log(`isSelected->${isSelected}`);
-
-	const [isStarSelected, setSelectedStar] = useState(isSelected);
-    const [reviewCount, setReviewCount] = useState(repo.reviewCount);
-
-
-
-	const updateReview = () => {
-        console.log(`item-->${item}`);
-        console.log(`isStarSelected-->${isStarSelected}`);
-        if(!isStarSelected) {
-            setReviewCount(item);
+        if (!isStarSelected) {
             updateReviews(repo, item);
+            setSelectedStar(!isStarSelected);
         } else {
-            setReviewCount(0);
-            updateReviews(repo, 0);
+            if (selectedReview === item) {
+                updateReviews(repo, 0);
+                setSelectedStar(!isStarSelected);
+            } else {
+                updateReviews(repo, item);
+            }
         }
-        setSelectedStar(!isStarSelected);
-	};
+    };
 
 
-	let reviewButton = isStarSelected
-         ? (
-			<StarIcon />
-		) : (
-			<StarOutlineIcon />
-		);
+    let reviewButton = isStarSelected
+        ? (
+            <StarIcon />
+        ) : (
+            <StarOutlineIcon />
+        );
 
-	return (
-		<IconButton
-			sx={{ display: "inline-block" }}
-			size="large"
-			onClick={updateReview}
-		>
-			{reviewButton}
-		</IconButton>
-	);
+    return (
+        <IconButton
+            sx={{ display: "inline-block" }}
+            size="large"
+            onClick={updateReview}
+        >
+            {reviewButton}
+        </IconButton>
+    );
 };
 
 export default ReviewStar;

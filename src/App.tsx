@@ -7,6 +7,7 @@ import { FavoritesListProps, FavoritesProps, SearchResultProps } from "./utils/t
 import Welcome from "./components/searchContent/Welcome";
 import SearchRepositories from "./components/searchContent/SearchRepositories";
 import Favorites from "./components/favorites/Favorites";
+import ErrorBlock from "./components/common/ErrorBlock";
 
 function App() {
 	const [activeTab, setActiveTab] = useState(0);
@@ -62,7 +63,7 @@ function App() {
 			/>
 			<Box>
 				<TabContent activeTab={activeTab} contentId={0}>
-					{(!searchResult.length || !searchQuery) && <Welcome />}
+					{(!searchResult.length || !searchQuery) && <Welcome/>}
 					{searchQuery && (
 						<SearchRepositories
 							searchQuery={searchQuery}

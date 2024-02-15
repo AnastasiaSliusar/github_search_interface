@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FavoritesProps, ReviewProps } from "../../utils/type";
 
 import {
-	Typography,
 	Box,
 } from "@mui/material";
 import ReviewStar from "./ReviewStar";
@@ -17,19 +16,14 @@ const Review = ({ repo, updateReviews }: ReviewProps) => {
 	}
 
 	let selectedStartsArr = starsArr.slice(0, selectedReview);
-
-	console.log(`selectedStartsArr-->${selectedStartsArr}`);
-
-
 	let unSelectedStartsArr = starsArr.slice(selectedReview);
-	console.log(`unSelectedStartsArr-->${unSelectedStartsArr}`);
 
 	let selectedStarts = selectedStartsArr.map((index)=>{
-		return <ReviewStar item={index} repo={repo} updateReviews={handleUpdateReviews} isSelected={true} key={index}/>
+		return <ReviewStar item={index} repo={repo} updateReviews={handleUpdateReviews} isSelected={true} key={index} selectedReview={selectedReview}/>
 	});
 
 	let unSelectedStarts = unSelectedStartsArr.map((index)=>{
-		return <ReviewStar item={index} repo={repo} updateReviews={handleUpdateReviews} isSelected={false} key={index}/>
+		return <ReviewStar item={index} repo={repo} updateReviews={handleUpdateReviews} isSelected={false} key={index} selectedReview={selectedReview}/>
 	});
 
 	
