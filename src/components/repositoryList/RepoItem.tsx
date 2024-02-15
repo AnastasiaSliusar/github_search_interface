@@ -15,10 +15,8 @@ import {
 
 const RepoItem = ({ repo, isFavorite, updateFavorites, children }: RepoItemProps) => {
 
-	console.log(`reviews-->${children}`);
+
 	const [isFav, setIsFav] = useState(isFavorite);
-	console.log(`repo-->${JSON.stringify(repo)}`);
-	console.log(`isFav--.${isFav}`);
 	const favoriteButton = isFav ? <FavoriteIcon /> : <FavoriteBorderIcon />;
 	const toggleFavorite = () => {
 		setIsFav(!isFav);
@@ -37,7 +35,7 @@ const RepoItem = ({ repo, isFavorite, updateFavorites, children }: RepoItemProps
 					sx={{
 						display: "inline-block",
 						height: "inherit",
-						width: '300px'
+						width: '600px'
 					}}
 				>
 					<Typography>

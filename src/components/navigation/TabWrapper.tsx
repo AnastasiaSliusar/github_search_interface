@@ -8,18 +8,18 @@ import { styled, alpha } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const TabStyled = styled(Tab)(({ theme }) => ({
-	color: theme.palette.common.white,
+	color: theme.palette.common.black,
 	"&:hover": {
 		color: alpha(theme.palette.common.black, 0.25),
 	},
 	"&.Mui-selected": {
-		color: theme.palette.common.black,
+		color: theme.palette.common.white,
 	},
 }));
 
 const TabsStyled = styled(Tabs)(({ theme }) => ({
 	"& .MuiTabs-indicator": {
-		color: theme.palette.common.black,
+		color: theme.palette.common.white,
 	},
 }));
 

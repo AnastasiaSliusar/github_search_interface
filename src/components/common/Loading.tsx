@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import CircularProgress from '@mui/material/CircularProgress';
+import GitHubIcon from "@mui/icons-material/GitHub";
 import { Typography } from "@mui/material";
 
 const Loading = () => {
@@ -17,12 +17,12 @@ const Loading = () => {
 					}}
 				/>
 			</Box>
-			<Box sx={{
+		<Box sx={{
 				textAlign: 'center'
 			}}>
 			<CircularProgress/>
 			<Typography variant="h5">Loading...</Typography>
-			</Box>
+		</Box>
 		</Box>
 	);
 };

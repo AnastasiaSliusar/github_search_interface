@@ -4,10 +4,8 @@ import Navigation from "./components/navigation/Navigation";
 import TabContent from "./components/navigation/TabContent";
 import { Box } from "@mui/material";
 import { FavoritesListProps, FavoritesProps, SearchResultProps } from "./utils/type";
-import Welcome from "./components/searchContent/Welcome";
 import SearchRepositories from "./components/searchContent/SearchRepositories";
 import Favorites from "./components/favorites/Favorites";
-import ErrorBlock from "./components/common/ErrorBlock";
 
 function App() {
 	const [activeTab, setActiveTab] = useState(0);
@@ -20,7 +18,6 @@ function App() {
 		if (search) {
 			query = `${search} in:name`;
 		}
-		console.log(`query-->${query}`);
 		setSearchQuery(query);
 	};
 
@@ -29,7 +26,6 @@ function App() {
 	};
 
 	const updateData = (repos: SearchResultProps[]) => {
-		console.log(`data-->${repos}`);
 		setSearchResult(repos);
 	};
 
@@ -53,7 +49,6 @@ function App() {
 		setFavorites(favoriteRepos);
 	}
 
-	console.log(`favoriteRepos-->${JSON.stringify(favoriteRepos)}`);
 	return (
 		<Box>
 			<Navigation
@@ -63,7 +58,6 @@ function App() {
 			/>
 			<Box>
 				<TabContent activeTab={activeTab} contentId={0}>
-					{(!searchResult.length || !searchQuery) && <Welcome/>}
 					{searchQuery && (
 						<SearchRepositories
 							searchQuery={searchQuery}

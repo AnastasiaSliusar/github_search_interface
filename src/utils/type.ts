@@ -56,14 +56,12 @@ export type RepoItemProps = {
     children?: React.ReactNode
 };
 
-//
 export type SearchContentProps = {
     searchQuery: string
     updateData: (searchResult: SearchResultProps[]) => void
     updateFavorites:(repo: SearchResultProps, isFavorite: boolean) => void
 }
 
-///////
 export type RepositoryListProps = {
     repos: SearchResultProps[]
     favoriteRepos: FavoritesListProps
